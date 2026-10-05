@@ -127,3 +127,4 @@ window.addEventListener('resize', () => {
 
 resizeCanvas();
 scheduleStoryUpdate();
+
