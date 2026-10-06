@@ -112,7 +112,7 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
   });
 }, { threshold: .14 });
 
-document.querySelectorAll('.intro, .activities-heading, .activity-row, .join-copy, .join-note').forEach((element, index) => {
+document.querySelectorAll('.intro, .history-text, .history-visual, .activities-heading, .activity-row, .join-copy, .join-note').forEach((element, index) => {
   element.classList.add('motion-reveal');
   element.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 75}ms`);
   revealObserver.observe(element);
@@ -129,53 +129,3 @@ resizeCanvas();
 scheduleStoryUpdate();
 
 
-// Modal Logic
-const modal = document.getElementById('dept-modal');
-const modalClose = document.querySelector('.modal-close');
-const modalDeptName = document.getElementById('modal-dept-name');
-const modalHead = document.getElementById('modal-head');
-const modalCohead = document.getElementById('modal-cohead');
-
-document.querySelectorAll('.activity-row').forEach(row => {
-  row.addEventListener('click', () => {
-    const deptName = row.querySelector('h3').textContent;
-    const head = row.getAttribute('data-head');
-    const cohead = row.getAttribute('data-cohead');
-    
-    modalDeptName.textContent = deptName;
-    modalHead.textContent = head;
-    modalCohead.textContent = cohead;
-    
-    if(cohead === 'N/A') {
-      modalCohead.parentElement.style.display = 'none';
-    } else {
-      modalCohead.parentElement.style.display = 'flex';
-    }
-    
-    modal.showModal();
-  });
-  
-  // Also open on Enter key for accessibility
-  row.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      row.click();
-    }
-  });
-});
-
-modalClose.addEventListener('click', () => {
-  modal.close();
-});
-
-modal.addEventListener('click', (e) => {
-  const dialogDimensions = modal.getBoundingClientRect();
-  if (
-    e.clientX < dialogDimensions.left ||
-    e.clientX > dialogDimensions.right ||
-    e.clientY < dialogDimensions.top ||
-    e.clientY > dialogDimensions.bottom
-  ) {
-    modal.close();
-  }
-});

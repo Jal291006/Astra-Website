@@ -15,11 +15,14 @@
 <body>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="ASTRA home"><img src="logo.jpg" alt="ASTRA" class="brand-logo"></a>
-    <span class="header-location">ASTRONOMY & ASTROPHYSICS CLUB <i></i> IIIT SURAT</span>
     <nav class="site-nav" aria-label="Main navigation">
       <a href="#club">The club</a>
-      <a href="#activities">What we do</a>
-      <a href="#join">Get involved</a>
+      <a href="departments.html">Departments</a>
+      <a href="https://dynamo-sjoshi.github.io/Perihelion/">Newsletter</a>
+      <a href="projects.html">Projects</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="resources.html">Resources</a>
+      <a href="team.html">Team</a>
     </nav>
   </header>
 
@@ -28,16 +31,14 @@
       <div class="story-stage">
         <div class="sky-backdrop" aria-hidden="true"></div>
         <canvas class="star-canvas" aria-hidden="true"></canvas>
-        <div class="story-coordinate">21.17° N &nbsp; / &nbsp; 72.78° E</div>
+        <div class="story-coordinate">21.27° N &nbsp; / &nbsp; 72.95° E</div>
         <div class="story-copy">
-          <p class="eyebrow"><span class="eyebrow-dot"></span> ASTRONOMY & ASTROPHYSICS CLUB / IIIT SURAT</p>
           <div class="story-headlines" aria-live="polite">
             <h1 class="story-headline active" data-story-index="0">The sky is<br />better <em>together.</em></h1>
             <h1 class="story-headline" data-story-index="1" aria-hidden="true">There’s more<br />to <em>every night.</em></h1>
             <h1 class="story-headline" data-story-index="2" aria-hidden="true">Big questions<br /><em>start by looking up.</em></h1>
           </div>
           <p class="story-description">A campus home for curious minds, clear nights, and the science behind everything out there.</p>
-          <a class="hero-link" href="#activities">Find your place in ASTRA <span aria-hidden="true">↓</span></a>
         </div>
         <div class="story-footer"><span>LOOK UP. ASK WHY. KEEP EXPLORING.</span><span class="scroll-hint">SCROLL TO EXPLORE <i></i></span><span class="story-counter">01 <b>/ 03</b></span></div>
         <div class="story-progress" aria-hidden="true"><span></span></div>
@@ -45,55 +46,98 @@
     </section>
 
     <section class="intro" id="club">
-      <div class="section-kicker"><span>01</span> A CLUB FOR THE CURIOUS</div>
+      <div class="intro-visual">
+        <div class="image-overlay-container" tabindex="0" role="button">
+          <img src="asteroids.webp" alt="Asteroids in space" class="intro-image">
+          <div class="image-overlay">
+            <h4>Asteroids & comets</h4>
+            <span class="overlay-meta">JPL Small-Body Database · Minor Planet Center</span>
+            <p>Orbital data for hundreds of thousands of asteroids and comets, rendered as true trajectories through the Solar System — including near-Earth objects and every famous named comet.</p>
+          </div>
+        </div>
+      </div>
       <div class="intro-copy">
         <h2>From the first look through a telescope to the code behind a discovery.</h2>
-        <p>ASTRA brings students together to observe the night sky, ask bigger questions, and learn by doing. No single path into astronomy: just a shared curiosity about the universe.</p>
+        <p>ASTRA is IIIT Surat’s premier interdisciplinary space-tech and astronomy club. Designed to bridge the gap between theoretical astrophysics and applied engineering, ASTRA provides a collaborative platform for students across all departments to channel their passion for space into hands-on technology, software development, and observational sciences.</p>
+        
+        <div class="intro-details">
+          <div class="detail-block">
+            <h3>Mission</h3>
+            <p>To democratize space-technology education on campus by equipping students with practical software, hardware, and analytical skills, transforming a childhood fascination with space into a tangible engineering portfolio.</p>
+          </div>
+          <div class="detail-block">
+            <h3>Core Objectives</h3>
+            <ul>
+              <li><strong>Interdisciplinary Collaboration:</strong> To create a unified hub where students from coding, AI, and electronics backgrounds can collaborate on unified aerospace projects.</li>
+              <li><strong>Beginner-Friendly Onboarding:</strong> To provide accessible, peer-led training that requires zero prior experience in astronomy.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="activities" id="activities">
       <div class="activities-heading">
-        <div class="section-kicker"><span>02</span> LEARN BY EXPLORING</div>
+        <div class="section-kicker"><span></span></div>
         <h2>Pick a direction.<br /><em>We’ll look up.</em></h2>
       </div>
       <div class="activity-list">
-        <article class="activity-row" data-head="Jainil" data-cohead="Jal" role="button" tabindex="0">
+        <article class="activity-row">
           <span class="activity-number">01</span>
           <div class="activity-name"><h3>Observational astronomy</h3><span>THE NIGHT SKY</span></div>
           <p>Telescope practice, skywatching sessions, celestial event logs, and astrophotography.</p>
         </article>
-        <article class="activity-row" data-head="Aditya" data-cohead="Mridul" role="button" tabindex="0">
+        <article class="activity-row">
           <span class="activity-number">02</span>
           <div class="activity-name"><h3>Astrophysics & research</h3><span>THE BIG QUESTIONS</span></div>
           <p>Explore Hubble’s law, exoplanet data, orbital simulations, and the physics of the universe.</p>
         </article>
-        <article class="activity-row" data-head="Yash" data-cohead="N/A" role="button" tabindex="0">
+        <article class="activity-row">
           <span class="activity-number">03</span>
           <div class="activity-name"><h3>Space data & software</h3><span>SCIENCE THROUGH CODE</span></div>
           <p>Work with real astronomy datasets, model planetary motion, and build tools for discovery.</p>
         </article>
-        <article class="activity-row" data-head="Aryan" data-cohead="Pratik" role="button" tabindex="0">
+        <article class="activity-row">
           <span class="activity-number">04</span>
           <div class="activity-name"><h3>Astro-tech & instrumentation</h3><span>HANDS-ON BUILDING</span></div>
           <p>Learn optics and sensors, explore satellite systems, and build telescope and tracking projects.</p>
         </article>
-        <article class="activity-row" data-head="Namya" data-cohead="Hiren" role="button" tabindex="0">
+        <article class="activity-row">
           <span class="activity-number">05</span>
           <div class="activity-name"><h3>Satellite & communication</h3><span>LISTENING FROM EARTH</span></div>
           <p>Study satellite orbits, tracking, ground stations, and the systems that carry signals across space.</p>
         </article>
+        <article class="activity-row">
+          <span class="activity-number">06</span>
+          <div class="activity-name"><h3>Non-Tech</h3><span>OPERATIONS & OUTREACH</span></div>
+          <p>Event management, design, content creation, social media.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="history" id="history">
+      <div class="history-grid">
+        <div class="history-text">
+          <div class="section-kicker"><span></span> </div>
+          <h2>The Origin Story.<br /><em>How it started.</em></h2>
+          <div class="history-copy">
+            <p>ASTRA was born in April 2026 from a shared realization: IIIT Surat needed a home for space enthusiasts. What started as a few students wanting to look at the stars quickly grew into a mission to build a serious space-tech ecosystem on campus.</p>
+          </div>
+        </div>
+        <div class="history-visual">
+          <img src="founding_team.jpg" alt="ASTRA Founding Team" class="team-image">
+        </div>
       </div>
     </section>
 
     <section class="join" id="join">
       <div class="join-copy">
-        <div class="section-kicker"><span>03</span> YOUR NEXT CLEAR NIGHT</div>
+        <div class="section-kicker"><span></span></div>
         <h2>Curiosity is<br />all you need.</h2>
         <p>New to astronomy? Start by looking up with us. ASTRA learns together, from the first constellation to the first working instrument.</p>
-        <a class="join-link" href="#activities">Explore the club <span aria-hidden="true">↗</span></a>
+        <a class="join-link" href="#activities"><span aria-hidden="true"></span></a>
       </div>
-      <div class="join-note"><span class="note-star" aria-hidden="true">✳</span><p>Somewhere above campus,<br />there’s always something to see.</p><span class="note-coordinates">ASTRA / IIIT SURAT</span></div>
+      <div class="join-note"><span class="note-star" aria-hidden="true"><svg height="89px" width="89px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-56.32 -56.32 624.64 624.64" xml:space="preserve" fill="#4e0e6c" stroke="#4e0e6c" stroke-width="4.608" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="3.072"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#0d207d;} </style> <g> <polygon class="st0" points="346.572,90.717 416.641,121.454 414.662,125.959 446.979,140.13 464.561,100.032 432.244,85.869 430.266,90.374 360.204,59.637 362.183,55.132 329.874,40.96 312.285,81.05 344.601,95.222 "></polygon> <polygon class="st0" points="372.882,140.28 388.079,116.598 369.105,108.268 351.883,130.589 "></polygon> <polygon class="st0" points="171.818,55.35 137.015,134.719 404.237,246.294 433.996,178.439 "></polygon> <path class="st0" d="M82.752,1.447c-3.34-1.673-7.219-1.908-10.739-0.641c-3.511,1.267-6.35,3.926-7.852,7.344L29.827,86.455 c-1.502,3.418-1.533,7.313-0.087,10.754c1.447,3.441,4.247,6.14,7.743,7.461L117.712,135l41.694-95.073L82.752,1.447z"></path> <path class="st0" d="M475.166,192.102l-26.874-11.778l-33.654,76.74l26.873,11.778c6.89,3.028,14.922-0.109,17.942-7l22.72-51.791 C485.193,203.161,482.057,195.128,475.166,192.102z"></path> <path class="st0" d="M272.107,221.416c0-11.419-9.244-20.679-20.663-20.679s-20.663,9.26-20.663,20.679 c0,11.418,9.244,20.663,20.663,20.663S272.107,232.834,272.107,221.416z"></path> <path class="st0" d="M271.724,280.3h37.831v-24.66h-58.111h-58.11v24.66h37.83L133.37,476.86 c-2.628,5.099-0.618,11.38,4.489,14.015c5.115,2.628,11.396,0.61,14.023-4.505l86.298-170.523l2.862,185.743 c0,5.748,4.661,10.41,10.402,10.41c5.741,0,10.402-4.662,10.402-10.41l2.863-185.743l86.298,170.523 c2.628,5.114,8.908,7.132,14.023,4.505c5.107-2.636,7.117-8.916,4.489-14.015L271.724,280.3z"></path> </g> </g></svg></span><p>Somewhere above campus,<br />there’s always something to see.</p><span class="note-coordinates">ASTRA / IIIT SURAT</span></div>
     </section>
   </main>
 
@@ -102,22 +146,7 @@
     <span>ASTRONOMY & ASTROPHYSICS CLUB · IIIT SURAT</span>
     <a href="#home">BACK TO THE SKY ↑</a>
   </footer>
-  <dialog id="dept-modal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Close modal">×</button>
-      <h3 id="modal-dept-name">Department Name</h3>
-      <div class="modal-body">
-        <div class="modal-person">
-          <span class="person-role">Head</span>
-          <span class="person-name" id="modal-head">Name</span>
-        </div>
-        <div class="modal-person">
-          <span class="person-role">Co-Head</span>
-          <span class="person-name" id="modal-cohead">Name</span>
-        </div>
-      </div>
-    </div>
-  </dialog>
+
   <script src="script.js"></script>
 </body>
 </html>
