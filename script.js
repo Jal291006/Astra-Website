@@ -5,7 +5,7 @@ const headlines = [...document.querySelectorAll('.story-headline')];
 const progressBar = document.querySelector('.story-progress span');
 const counter = document.querySelector('.story-counter');
 const canvas = document.querySelector('.star-canvas');
-const context = canvas.getContext('2d');
+const context = canvas ? canvas.getContext('2d') : null;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let storyProgress = 0;
 let framePending = false;
@@ -29,6 +29,7 @@ function makeStars() {
 }
 
 function resizeCanvas() {
+  if (!canvas || !context) return;
   pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
   width = window.innerWidth;
   height = window.innerHeight;
@@ -76,6 +77,7 @@ function animate(time) {
 
 function updateStory() {
   framePending = false;
+  if (!story || !stage || !progressBar || !counter) return;
   const range = Math.max(1, story.offsetHeight - window.innerHeight);
   storyProgress = Math.max(0, Math.min(1, -story.getBoundingClientRect().top / range));
   const activeIndex = Math.min(headlines.length - 1, Math.floor(storyProgress * headlines.length));
@@ -92,16 +94,18 @@ function updateStory() {
 }
 
 function scheduleStoryUpdate() {
-  if (!framePending) {
+  if (!framePending && story) {
     framePending = true;
     requestAnimationFrame(updateStory);
   }
 }
 
-new IntersectionObserver(([entry]) => {
-  storyVisible = entry.isIntersecting;
-  if (storyVisible && !reduceMotion) requestAnimationFrame(animate);
-}).observe(story);
+if (story) {
+  new IntersectionObserver(([entry]) => {
+    storyVisible = entry.isIntersecting;
+    if (storyVisible && !reduceMotion) requestAnimationFrame(animate);
+  }).observe(story);
+}
 
 const revealObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach((entry) => {
@@ -112,7 +116,7 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
   });
 }, { threshold: .14 });
 
-document.querySelectorAll('.intro, .history-text, .history-visual, .activities-heading, .activity-row, .join-copy, .join-note').forEach((element, index) => {
+document.querySelectorAll('.intro, .history-text, .history-visual, .activities-heading, .activity-row, .join-copy, .join-note, .team-hero, .team-card, .team-category-header').forEach((element, index) => {
   element.classList.add('motion-reveal');
   element.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 75}ms`);
   revealObserver.observe(element);
