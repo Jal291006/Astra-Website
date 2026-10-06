@@ -133,3 +133,23 @@ resizeCanvas();
 scheduleStoryUpdate();
 
 
+
+// Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const siteNav = document.querySelector('.site-nav');
+
+if (menuToggle && siteNav) {
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    siteNav.classList.toggle('open'); document.body.style.overflow = siteNav.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // Close menu when a link is clicked
+  siteNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      siteNav.classList.remove('open'); document.body.style.overflow = '';
+    });
+  });
+}
+
