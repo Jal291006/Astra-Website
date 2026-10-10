@@ -101,7 +101,7 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
 .site-footer .brand { font-size: 13px; }
 .site-footer .brand-logo { max-height: 28px; }
 .site-footer .social-links { display: flex; gap: 20px; align-items: center; }
-.site-footer .social-links a, .site-footer .social-links .email-text, .site-footer>a:last-child { color: #82919b; font-size: 9px; text-decoration: none; text-transform: uppercase; }
+.site-footer .social-links a, .site-footer .social-links .email-text, .site-footer>a:last-child { color: #82919b; font-size: 12px; text-decoration: none; text-transform: uppercase; }
 .site-footer .social-links .email-text { margin-left: 10px; text-transform: none; }
 .site-footer .social-links a svg { width: 15px; height: 15px; display: block; }
 
@@ -146,7 +146,7 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
   .activities-heading h2 { font-size: 39px; }
   .activity-row { grid-template-columns: 27px 1fr 14px; gap: 10px; }
   .activity-name h3 { font-size: 15px; }
-  .activity-row>p { font-size: 11px; }
+  .activity-row>p { font-size: 13px; }
   .join { padding-top: 72px; padding-bottom: 72px; }
   .join-copy h2 { font-size: 54px; }
   .site-footer { align-items: flex-start; flex-wrap: wrap; }
@@ -166,7 +166,7 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
    ========================================= */
 
 .activity-row.dept-row {
-  grid-template-columns: 48px minmax(240px, 1fr) minmax(320px, 1.4fr) 24px;
+  grid-template-columns: 48px minmax(240px, 1fr) minmax(320px, 1.4fr);
   gap: 28px;
   align-items: start;
   padding: 34px 0;
@@ -483,3 +483,7 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
   }
 }
 
+
+.team-page .activities { padding: 0 0 60px; background: transparent; }
+.team-page .activities-heading { margin-bottom: 32px; }
+.site-nav a.active { color: var(--cyan); }
