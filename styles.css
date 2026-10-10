@@ -101,7 +101,9 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
 .site-footer .brand { font-size: 13px; }
 .site-footer .brand-logo { max-height: 28px; }
 .site-footer .social-links { display: flex; gap: 20px; align-items: center; }
-.site-footer .social-links a, .site-footer .social-links .email-text, .site-footer>a:last-child { color: #82919b; font-size: 9px; text-decoration: none; text-transform: uppercase; }`r`n.site-footer .social-links .email-text { margin-left: 10px; text-transform: none; }`r`n.site-footer .social-links a svg { width: 15px; height: 15px; display: block; }
+.site-footer .social-links a, .site-footer .social-links .email-text, .site-footer>a:last-child { color: #82919b; font-size: 9px; text-decoration: none; text-transform: uppercase; }
+.site-footer .social-links .email-text { margin-left: 10px; text-transform: none; }
+.site-footer .social-links a svg { width: 15px; height: 15px; display: block; }
 
 @media (max-width: 800px) {
   .site-header { padding: 0 6vw; }
