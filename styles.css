@@ -19,7 +19,7 @@ a { color: inherit; text-decoration: none; }
 .site-header { position: fixed; inset: 0 0 auto; z-index: 10; height: 76px; padding: 0 6vw; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.12); background: rgba(6,12,20,.92); backdrop-filter: blur(12px); }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 800; letter-spacing: .04em; }
 .brand-logo { max-height: 42px; width: auto; object-fit: contain; }
-.header-location, .eyebrow, .section-kicker, .activity-name>span, .note-coordinates, .site-footer>span, .site-footer>a:last-child { font: 10px var(--mono); letter-spacing: .04em; }
+.header-location, .eyebrow, .section-kicker, .activity-name>span, .note-coordinates, .site-footer .social-links a, .site-footer .social-links .email-text, .site-footer>a:last-child { font: 10px var(--mono); letter-spacing: .04em; }
 .header-location { color: rgba(240,242,237,.72); }
 .header-location i, .eyebrow-dot { display: inline-block; width: 5px; height: 5px; margin: 0 9px 1px; border-radius: 50%; background: var(--warm); }
 .site-nav { display: flex; align-items: center; gap: 28px; color: rgba(240,242,237,.88); font-size: 12px; }
@@ -100,7 +100,8 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
 .site-footer { min-height: 80px; padding: 20px 6vw; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #070c12; }
 .site-footer .brand { font-size: 13px; }
 .site-footer .brand-logo { max-height: 28px; }
-.site-footer>span, .site-footer>a:last-child { color: #82919b; font-size: 9px; }
+.site-footer .social-links { display: flex; gap: 20px; align-items: center; }
+.site-footer .social-links a, .site-footer .social-links .email-text, .site-footer>a:last-child { color: #82919b; font-size: 9px; text-decoration: none; text-transform: uppercase; }`r`n.site-footer .social-links .email-text { margin-left: 10px; text-transform: none; }`r`n.site-footer .social-links a svg { width: 15px; height: 15px; display: block; }
 
 @media (max-width: 800px) {
   .site-header { padding: 0 6vw; }
@@ -147,7 +148,7 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
   .join { padding-top: 72px; padding-bottom: 72px; }
   .join-copy h2 { font-size: 54px; }
   .site-footer { align-items: flex-start; flex-wrap: wrap; }
-  .site-footer>span { order: 3; width: 100%; }
+  .site-footer .social-links { order: 3; width: 100%; justify-content: space-between; }
 }
 
 @media (prefers-reduced-motion: reduce) {
