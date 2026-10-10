@@ -487,3 +487,20 @@ body.motion-ready .motion-reveal:not(.revealed) { opacity: 0; transform: transla
 .team-page .activities { padding: 0 0 60px; background: transparent; }
 .team-page .activities-heading { margin-bottom: 32px; }
 .site-nav a.active { color: var(--cyan); }
+.page-layout {
+  padding: 150px 11vw 100px;
+  min-height: 80vh;
+  color: var(--paper);
+}
+.dept-hero {
+  padding: 130px 11vw 0;
+  margin-bottom: 20px;
+}
+@media (max-width: 800px) {
+  .page-layout { padding: 110px 8vw 80px; }
+  .dept-hero { padding: 110px 8vw 0; }
+}
+@media (max-width: 520px) {
+  .page-layout { padding: 95px 6vw 60px; }
+  .dept-hero { padding: 95px 6vw 0; }
+}
