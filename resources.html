@@ -27,10 +27,171 @@
     </nav>
   </header>
 
+    <style>
+    .resource-category { margin-top: 80px; }
+    .resource-category h2 { font-size: 28px; font-weight: 500; margin-bottom: 8px; }
+    .resource-category > p { color: #81909b; font-size: 15px; margin-bottom: 40px; }
+    .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .resource-card { 
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid rgba(255,255,255,0.08); 
+      border-radius: 12px; 
+      transition: all 0.3s ease; 
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+    }
+    .resource-card:hover { 
+      background: rgba(255,255,255,0.06); 
+      border-color: rgba(255,255,255,0.2); 
+      transform: translateY(-4px); 
+    }
+    .resource-image-wrap {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .resource-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .resource-card:hover .resource-image {
+      transform: scale(1.05);
+    }
+    .resource-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .resource-title { font-size: 22px; font-weight: 500; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; color: var(--paper); }
+    .resource-title svg { width: 20px; height: 20px; color: var(--cyan); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 15px; }
+    .resource-card:hover .resource-title svg { transform: translate(4px, -4px); }
+    .resource-desc { color: #aeb9c0; font-size: 15px; line-height: 1.6; margin-bottom: 0; }
+  </style>
+
   <main style="padding: 150px 11vw 100px; min-height: 80vh; color: var(--paper);">
     <div class="section-kicker"><span>03</span> RESOURCES</div>
     <h1 style="font-size: clamp(40px, 6vw, 70px); font-weight: 500; margin: 20px 0;">Resources</h1>
-    <p style="color: #aeb9c0; font-size: 16px; max-width: 600px; line-height: 1.8;">This is a placeholder page for the Resources section. Detailed content will be added here soon.</p>
+    <p style="color: #aeb9c0; font-size: 18px; max-width: 600px; line-height: 1.8;">A curated collection of tools, databases, and reading materials for ASTRA members to explore the universe.</p>
+
+    <div class="resource-category">
+      <h2>The "Getting Started" Hub</h2>
+      <p>Perfect for freshers who have zero experience but want to look up at the night sky.</p>
+      
+      <div class="resource-grid">
+        <a href="https://stellarium-web.org/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/stellarium.jpg" alt="Stellarium" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              Stellarium Web
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">The absolute gold standard for planetarium software. It runs right in the browser and shows exactly what the sky looks like from Surat at any given time.</p>
+          </div>
+        </a>
+
+        <a href="https://skyandtelescope.org/astronomy-resources/stargazing-basics/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/stargazing.jpg" alt="Stargazing" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              Stargazing Basics
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">A fantastic collection of articles by Sky & Telescope on how to start observing, read a star chart, and use binoculars before buying a telescope.</p>
+          </div>
+        </a>
+
+        <a href="https://www.timeanddate.com/astronomy/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/timedate.jpg" alt="Time and Date" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              Time and Date Astronomy
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">The most reliable tool for checking moon phases, planetary rise/set times, and upcoming eclipses tailored to your exact location.</p>
+          </div>
+        </a>
+
+        <a href="https://apod.nasa.gov/apod/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/apod.jpg" alt="NASA APOD" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              NASA APOD
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">NASA's Astronomy Picture of the Day. A daily dose of space inspiration. Highly recommended for the entire club to follow.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="resource-category">
+      <h2>Space Data & Software Tools</h2>
+      <p>Geared toward the Tech, Software, and Satellite departments to get their hands dirty with real data.</p>
+      
+      <div class="resource-grid">
+        <a href="https://www.astropy.org/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/astropy.jpg" alt="Astropy" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              Astropy
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">The core Python library for astronomy. If anyone in the Space Data & Software wing wants to code, this is where they start. Handles coordinates, FITS files, and cosmology.</p>
+          </div>
+        </a>
+
+        <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/horizons.jpg" alt="JPL Horizons" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              NASA JPL Horizons
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">A highly accurate database that generates orbital data (ephemerides) for planets, moons, comets, and asteroids. Perfect for coding orbital mechanics simulations.</p>
+          </div>
+        </a>
+
+        <a href="https://www.space-track.org/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/spacetrack.jpg" alt="Space Track" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              Space-Track.org
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">The definitive source for tracking satellites in Earth's orbit. Essential for the Satellite & Communication department to get TLE (Two-Line Element) data.</p>
+          </div>
+        </a>
+
+        <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/exoplanet.jpg" alt="Exoplanet Archive" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              NASA Exoplanet Archive
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">The official database of all confirmed exoplanets and Kepler/TESS data. Great for data science students who want to analyze light curves and transit data.</p>
+          </div>
+        </a>
+
+        <a href="https://www.rtl-sdr.com/about-rtl-sdr/" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <div class="resource-image-wrap"><img src="assets/resources/rtlsdr.jpg" alt="RTL SDR" class="resource-image"></div>
+          <div class="resource-content">
+            <div class="resource-title">
+              RTL-SDR Quick Start Guide
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </div>
+            <p class="resource-desc">The holy grail for cheap, software-defined radio. This will teach your hardware wing how to pick up weather satellite images directly from space using a simple USB dongle.</p>
+          </div>
+        </a>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -48,6 +209,7 @@
   </footer>
 </body>
 </html>
+
 
 
 
