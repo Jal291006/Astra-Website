@@ -27,10 +27,531 @@
     </nav>
   </header>
 
+  <style>
+    .gallery-intro {
+      color: #aeb9c0;
+      font-size: 17px;
+      max-width: 620px;
+      line-height: 1.8;
+      margin-bottom: 52px;
+    }
+
+    /* Breadcrumb / Back bar when inside a folder */
+    .folder-nav-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px 22px;
+      margin-bottom: 36px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .folder-nav-bar.active {
+      display: flex;
+    }
+    .folder-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid rgba(141, 227, 224, 0.35);
+      color: var(--cyan);
+      font: 12px var(--mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 9px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .folder-back-btn:hover {
+      background: rgba(141, 227, 224, 0.12);
+      border-color: var(--cyan);
+      transform: translateX(-3px);
+    }
+    .folder-breadcrumb {
+      font: 12px var(--mono);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .folder-breadcrumb strong {
+      color: var(--paper);
+      font-weight: 500;
+    }
+
+    /* Folders Grid */
+    .folders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 28px;
+    }
+
+    .folder-card {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.28s ease, filter 0.28s ease;
+      display: flex;
+      flex-direction: column;
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.42));
+    }
+    .folder-tab {
+      width: 136px;
+      height: 20px;
+      background: #1b3347;
+      border: 1px solid #355f6b;
+      border-bottom: none;
+      border-radius: 10px 12px 0 0;
+      transition: border-color 0.28s ease, background 0.28s ease;
+    }
+    .folder-main {
+      position: relative;
+      background: linear-gradient(180deg, #1b3347 0%, #132535 100%);
+      border: 1px solid #355f6b;
+      border-top: none;
+      border-radius: 0 14px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      transition: border-color 0.28s ease, background 0.28s ease;
+    }
+    .folder-main::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 134px;
+      right: -1px;
+      height: 14px;
+      border-top: 1px solid #355f6b;
+      border-top-right-radius: 14px;
+      pointer-events: none;
+      transition: border-color 0.28s ease;
+    }
+    .folder-card:hover {
+      transform: translateY(-6px);
+      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.55));
+    }
+    .folder-card:hover .folder-tab {
+      background: #213e56;
+      border-color: #62b6b9;
+    }
+    .folder-card:hover .folder-main {
+      background: linear-gradient(180deg, #213e56 0%, #172d40 100%);
+      border-color: #62b6b9;
+    }
+    .folder-card:hover .folder-main::before {
+      border-color: #62b6b9;
+    }
+
+    .folder-cover-wrap {
+      position: relative;
+      width: calc(100% - 24px);
+      height: 205px;
+      margin: 12px 12px 0;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #09131c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .folder-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .folder-card:hover .folder-cover-img {
+      transform: scale(1.05);
+    }
+    .folder-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(8, 15, 22, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(141, 227, 224, 0.35);
+      color: var(--cyan);
+      font: 11px var(--mono);
+      padding: 5px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .folder-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+    .folder-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font: 12px var(--mono);
+      color: var(--warm);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .folder-meta svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+    .folder-title {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .folder-desc {
+      margin: 0;
+      font-size: 14px;
+      color: #aeb9c0;
+      line-height: 1.65;
+    }
+
+    /* Inside Folder: Photos Grid */
+    .folder-view {
+      display: none;
+    }
+    .folder-view.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    .folder-view-header {
+      margin-bottom: 32px;
+    }
+    .folder-view-header h2 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 42px);
+      font-family: var(--serif);
+      font-weight: 500;
+    }
+    .folder-view-header p {
+      margin: 0;
+      color: #aeb9c0;
+      font-size: 15px;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .photo-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #09131c;
+      border: 1px solid var(--line);
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .photo-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(141, 227, 224, 0.5);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .photo-card:hover img {
+      transform: scale(1.04);
+    }
+    .photo-caption-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 28px 14px 12px;
+      background: linear-gradient(0deg, rgba(6, 12, 20, 0.9) 0%, transparent 100%);
+      color: var(--paper);
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .photo-card:hover .photo-caption-overlay {
+      opacity: 1;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(4, 9, 15, 0.94);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 40px 6vw;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 84vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 76vh;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .lightbox-caption {
+      margin-top: 14px;
+      font: 13px var(--mono);
+      color: #aeb9c0;
+      text-align: center;
+    }
+    .lightbox-close, .lightbox-prev, .lightbox-next {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--line);
+      color: var(--paper);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+      background: rgba(141, 227, 224, 0.18);
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+    .lightbox-close { top: 24px; right: 28px; }
+    .lightbox-prev { left: 24px; top: 50%; transform: translateY(-50%); }
+    .lightbox-next { right: 24px; top: 50%; transform: translateY(-50%); }
+  </style>
+
   <main class="page-layout">
     <h1 style="font-size: clamp(40px, 6vw, 70px); font-weight: 500; margin: 20px 0;">Gallery</h1>
-    <p style="color: #aeb9c0; font-size: 16px; max-width: 600px; line-height: 1.8;">This is a placeholder page for the Gallery section. Detailed content will be added here soon.</p>
+    <p class="gallery-intro">Explore moments from our stargazing sessions, instrumentation workshops, and club events—organized folder by folder.</p>
+
+    <!-- Top navigation bar when viewing inside a folder -->
+    <div class="folder-nav-bar" id="folderNavBar">
+      <button class="folder-back-btn" id="backToFoldersBtn" type="button">&larr; All Event Folders</button>
+      <span class="folder-breadcrumb">GALLERY &nbsp;/&nbsp; <strong id="currentFolderCrumb">Event</strong></span>
+    </div>
+
+    <!-- All Event Folders Grid -->
+    <section id="foldersGrid" class="folders-grid" aria-label="Event Folders"></section>
+
+    <!-- Single Folder Photos View -->
+    <section id="folderView" class="folder-view" aria-live="polite">
+      <div class="folder-view-header">
+        <div class="folder-meta" id="folderViewDate" style="margin-bottom: 8px;"></div>
+        <h2 id="folderViewTitle"></h2>
+        <p id="folderViewDesc"></p>
+      </div>
+      <div id="photosGrid" class="photos-grid"></div>
+    </section>
   </main>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-img" id="lightboxImg" draggable="false" referrerpolicy="no-referrer" />
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+  </div>
+
+  <script>
+    // Add or edit event folders and their photos right here
+    const GALLERY_FOLDERS = [
+      {
+        id: "founding-meet",
+        title: "Club Founding & Inauguration",
+        date: "April 2026",
+        description: "The founding team and inaugural gathering that kickstarted ASTRA at IIIT Surat.",
+        cover: "https://lh3.googleusercontent.com/d/1FxinJyx8vG9S-KOX4Hma-ztjXKb0gAqD=w1200",
+        photos: [
+          { src: "https://lh3.googleusercontent.com/d/1FxinJyx8vG9S-KOX4Hma-ztjXKb0gAqD=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/1W1wpxngIn2N3HnLyOcuhgP8lcdGhLoVb=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/1jZZvl2RRS5tJbeejii8NkdR1_FSEX-7C=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/1S-WcH6wkVMniQo9iH66x36rCDOvAUAe2=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/1K2hHOU2gak_7dhKkpjhjy1uTqgXBTqoh=w1200" }
+        ]
+      },
+      {
+        id: "orientation-2026-27",
+        title: "Orientation 2026-27",
+        date: "August 2026",
+        description: "Introducing the incoming batch to ASTRA's technical departments, telescopes, and space-tech roadmap.",
+        cover: "https://lh3.googleusercontent.com/d/1C5yww5-tX0Ju214i4BxtSjFn5tl45Mdq=w1200",
+        photos: [
+          { src: "https://lh3.googleusercontent.com/d/1C5yww5-tX0Ju214i4BxtSjFn5tl45Mdq=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/1CtVa1KJNrpU0rfXkCt36HXSJFyGT_7iC=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/15_gU9XwcJquv_x6BP32MUA1TsL31Ss9t=w1200" },
+          { src: "https://lh3.googleusercontent.com/d/1TyBIWV3Z2z9gUvS_nAB_VeSAKWgNv7g2=w1200" }
+        ]
+      }
+    ];
+
+    const foldersGrid = document.getElementById("foldersGrid");
+    const folderView = document.getElementById("folderView");
+    const folderNavBar = document.getElementById("folderNavBar");
+    const backToFoldersBtn = document.getElementById("backToFoldersBtn");
+    const currentFolderCrumb = document.getElementById("currentFolderCrumb");
+    const folderViewDate = document.getElementById("folderViewDate");
+    const folderViewTitle = document.getElementById("folderViewTitle");
+    const folderViewDesc = document.getElementById("folderViewDesc");
+    const photosGrid = document.getElementById("photosGrid");
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrev = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
+
+    let activePhotos = [];
+    let activePhotoIndex = 0;
+
+    function renderFolders() {
+      foldersGrid.innerHTML = GALLERY_FOLDERS.map((folder) => {
+        const count = folder.photos.length;
+        const countLabel = `${String(count).padStart(2, "0")} ${count === 1 ? "PHOTO" : "PHOTOS"}`;
+        const coverSrc = folder.cover || (folder.photos[0] && folder.photos[0].src) || "logo.jpg";
+        return `
+          <article class="folder-card" data-folder-id="${folder.id}" tabindex="0" role="button" aria-label="Open folder ${folder.title}">
+            <div class="folder-tab"></div>
+            <div class="folder-main">
+              <div class="folder-cover-wrap">
+                <img src="${coverSrc}" alt="${folder.title}" class="folder-cover-img" loading="lazy" referrerpolicy="no-referrer" draggable="false" />
+                <span class="folder-badge">${countLabel}</span>
+              </div>
+              <div class="folder-body">
+                <div class="folder-meta">
+                  <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                  <span>${folder.date}</span>
+                </div>
+                <h2 class="folder-title">${folder.title}</h2>
+                <p class="folder-desc">${folder.description}</p>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      foldersGrid.querySelectorAll(".folder-card").forEach((card) => {
+        card.addEventListener("click", () => openFolder(card.dataset.folderId));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openFolder(card.dataset.folderId);
+          }
+        });
+      });
+    }
+
+    function openFolder(folderId) {
+      const folder = GALLERY_FOLDERS.find((f) => f.id === folderId);
+      if (!folder) return;
+
+      activePhotos = folder.photos;
+      currentFolderCrumb.textContent = folder.title;
+      folderViewDate.textContent = `${folder.date}  ·  ${folder.photos.length} ${folder.photos.length === 1 ? "Photo" : "Photos"}`;
+      folderViewTitle.textContent = folder.title;
+      folderViewDesc.textContent = folder.description;
+
+      if (folder.photos.length === 0) {
+        photosGrid.innerHTML = `<div style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); font: 13px var(--mono);">Photos for ${folder.title} will be added soon.</div>`;
+      } else {
+        photosGrid.innerHTML = folder.photos.map((photo, idx) => `
+          <div class="photo-card" data-photo-index="${idx}" tabindex="0" role="button" aria-label="View photo ${idx + 1}">
+            <img src="${photo.src}" alt="${folder.title} photo ${idx + 1}" loading="lazy" referrerpolicy="no-referrer" draggable="false" />
+          </div>
+        `).join("");
+      }
+
+      photosGrid.querySelectorAll(".photo-card").forEach((card) => {
+        const idx = Number(card.dataset.photoIndex);
+        card.addEventListener("click", () => openLightbox(idx));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openLightbox(idx);
+          }
+        });
+      });
+
+      foldersGrid.style.display = "none";
+      folderNavBar.classList.add("active");
+      folderView.classList.add("active");
+    }
+
+    function closeFolder() {
+      folderView.classList.remove("active");
+      folderNavBar.classList.remove("active");
+      foldersGrid.style.display = "grid";
+    }
+
+    function openLightbox(index) {
+      if (!activePhotos.length) return;
+      activePhotoIndex = (index + activePhotos.length) % activePhotos.length;
+      const item = activePhotos[activePhotoIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = "";
+      lightboxCaption.textContent = "";
+      lightbox.classList.add("open");
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightboxImg.src = "";
+    }
+
+    backToFoldersBtn.addEventListener("click", closeFolder);
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxPrev.addEventListener("click", () => openLightbox(activePhotoIndex - 1));
+    lightboxNext.addEventListener("click", () => openLightbox(activePhotoIndex + 1));
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") openLightbox(activePhotoIndex - 1);
+      if (e.key === "ArrowRight") openLightbox(activePhotoIndex + 1);
+    });
+
+    renderFolders();
+  </script>
 
   <footer class="site-footer">
     <a class="brand" href="index.html"><img src="logo.jpg" alt="ASTRA" class="brand-logo"></a>
